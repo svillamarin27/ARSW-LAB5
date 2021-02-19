@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.eci.arsw.blueprints.services.BlueprintsServices;
 
 @RestController
-@RequestMapping(value = "/blueprint")
+@RequestMapping(value = "/blueprints")
 @Service
 public class BlueApiController {
 

@@ -65,8 +65,13 @@ Para este laboratorio se  implementaron las clases y metodos del laboratorio pas
 	$ mvn spring-boot:run
 	
 	```
+	
+	![image](https://user-images.githubusercontent.com/37603257/108883434-6cde7680-75d3-11eb-9431-909a98461f8d.png)
+	
+	
 	Y luego enviando una petición GET a: http://localhost:8080/blueprints. Rectifique que, como respuesta, se obtenga un objeto jSON con una lista que contenga el detalle de los planos suministados por defecto, y que se haya aplicado el filtrado de puntos correspondiente.
 
+	![image](https://user-images.githubusercontent.com/37603257/108883527-8b447200-75d3-11eb-8ede-86c3ffa258a1.png)
 
 5. Modifique el controlador para que ahora, acepte peticiones GET al recurso /blueprints/{author}, el cual retorne usando una representación jSON todos los planos realizados por el autor cuyo nombre sea {author}. Si no existe dicho autor, se debe responder con el código de error HTTP 404. Para esto, revise en [la documentación de Spring](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html), sección 22.3.2, el uso de @PathVariable. De nuevo, verifique que al hacer una petición GET -por ejemplo- a recurso http://localhost:8080/blueprints/juan, se obtenga en formato jSON el conjunto de planos asociados al autor 'juan' (ajuste esto a los nombres de autor usados en el punto 2).
 
