@@ -90,7 +90,7 @@ public class InMemoryPersistenceTest {
             Blueprint bp2 = new Blueprint("john", "threepaints", pts2);
             testbpp.saveBlueprint(bp2);
             prueba.add(bp2);
-            assertEquals(prueba, testbpp.getBlueprintsByAuthor("john"));
+            assertEquals(prueba, testbpp.getBlueprintsByAuthor("john","bp"));
         } catch  (BlueprintPersistenceException | BlueprintNotFoundException e){
             fail("Blueprint persistence failed searching the blueprints by author.");
         }

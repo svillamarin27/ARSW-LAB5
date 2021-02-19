@@ -46,12 +46,11 @@ public class BlueApiController {
    // @Qualifier("BlueprintsServices")
     
 	
-	@RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> manejadorBlueprints(){
+	@RequestMapping(value="/{author}/{name}",method = RequestMethod.GET)
+    public ResponseEntity<?> manejadorBlueprints(@PathVariable("author") String author,@PathVariable("name") String name){
 		try {
-			System.out.println("controller");
-			System.out.println(services.getAllBlueprints());
-			return new ResponseEntity<>(services.getAllBlueprints(), HttpStatus.ACCEPTED);
+			
+			return new ResponseEntity<>(services.getBlueprintsByAuthor(author,name), HttpStatus.ACCEPTED);
         }catch (Exception ex) {
             Logger.getLogger(BlueApiController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error",HttpStatus.NOT_FOUND);

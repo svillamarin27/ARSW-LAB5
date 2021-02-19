@@ -75,8 +75,17 @@ Para este laboratorio se  implementaron las clases y metodos del laboratorio pas
 
 5. Modifique el controlador para que ahora, acepte peticiones GET al recurso /blueprints/{author}, el cual retorne usando una representación jSON todos los planos realizados por el autor cuyo nombre sea {author}. Si no existe dicho autor, se debe responder con el código de error HTTP 404. Para esto, revise en [la documentación de Spring](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html), sección 22.3.2, el uso de @PathVariable. De nuevo, verifique que al hacer una petición GET -por ejemplo- a recurso http://localhost:8080/blueprints/juan, se obtenga en formato jSON el conjunto de planos asociados al autor 'juan' (ajuste esto a los nombres de autor usados en el punto 2).
 
+	![image](https://user-images.githubusercontent.com/37603257/108884312-70263200-75d4-11eb-8824-90d422fde2a0.png)
+	
+	![image](https://user-images.githubusercontent.com/37603257/108884373-86cc8900-75d4-11eb-8fea-6d7783bc206a.png)
+
 6. Modifique el controlador para que ahora, acepte peticiones GET al recurso /blueprints/{author}/{bpname}, el cual retorne usando una representación jSON sólo UN plano, en este caso el realizado por {author} y cuyo nombre sea {bpname}. De nuevo, si no existe dicho autor, se debe responder con el código de error HTTP 404. 
 
+	![image](https://user-images.githubusercontent.com/37603257/108885550-f68f4380-75d5-11eb-81df-c5b8317a8c59.png)
+	
+	![image](https://user-images.githubusercontent.com/37603257/108885652-1161b800-75d6-11eb-89aa-dbbad1619ec3.png)
+	
+	![image](https://user-images.githubusercontent.com/37603257/108885718-20486a80-75d6-11eb-8f71-08e0b6da0bb4.png)
 
 
 ### Parte II
