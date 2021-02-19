@@ -33,6 +33,7 @@ public class BlueprintsServices {
     }
     
     public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException{
+    	System.out.println("services");
         return bpp.getAllBlueprints();
     }
     

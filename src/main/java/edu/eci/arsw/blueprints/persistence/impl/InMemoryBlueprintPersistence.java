@@ -81,7 +81,8 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 	
 	@Override
 	public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
-		//Set<Blueprint> list = new HashSet(.);
+		System.out.println("inmeory");
+		System.out.println(blueprints.values());
 		return new HashSet<Blueprint>(blueprints.values());
 	}
 }
