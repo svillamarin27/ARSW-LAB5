@@ -65,27 +65,13 @@ Para este laboratorio se  implementaron las clases y metodos del laboratorio pas
 	$ mvn spring-boot:run
 	
 	```
-	
-	![image](https://user-images.githubusercontent.com/37603257/108883434-6cde7680-75d3-11eb-9431-909a98461f8d.png)
-	
-	
 	Y luego enviando una petición GET a: http://localhost:8080/blueprints. Rectifique que, como respuesta, se obtenga un objeto jSON con una lista que contenga el detalle de los planos suministados por defecto, y que se haya aplicado el filtrado de puntos correspondiente.
 
-	![image](https://user-images.githubusercontent.com/37603257/108883527-8b447200-75d3-11eb-8ede-86c3ffa258a1.png)
 
 5. Modifique el controlador para que ahora, acepte peticiones GET al recurso /blueprints/{author}, el cual retorne usando una representación jSON todos los planos realizados por el autor cuyo nombre sea {author}. Si no existe dicho autor, se debe responder con el código de error HTTP 404. Para esto, revise en [la documentación de Spring](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html), sección 22.3.2, el uso de @PathVariable. De nuevo, verifique que al hacer una petición GET -por ejemplo- a recurso http://localhost:8080/blueprints/juan, se obtenga en formato jSON el conjunto de planos asociados al autor 'juan' (ajuste esto a los nombres de autor usados en el punto 2).
 
-	![image](https://user-images.githubusercontent.com/37603257/108884312-70263200-75d4-11eb-8824-90d422fde2a0.png)
-	
-	![image](https://user-images.githubusercontent.com/37603257/108884373-86cc8900-75d4-11eb-8fea-6d7783bc206a.png)
-
 6. Modifique el controlador para que ahora, acepte peticiones GET al recurso /blueprints/{author}/{bpname}, el cual retorne usando una representación jSON sólo UN plano, en este caso el realizado por {author} y cuyo nombre sea {bpname}. De nuevo, si no existe dicho autor, se debe responder con el código de error HTTP 404. 
 
-	![image](https://user-images.githubusercontent.com/37603257/108885550-f68f4380-75d5-11eb-81df-c5b8317a8c59.png)
-	
-	![image](https://user-images.githubusercontent.com/37603257/108885652-1161b800-75d6-11eb-89aa-dbbad1619ec3.png)
-	
-	![image](https://user-images.githubusercontent.com/37603257/108885718-20486a80-75d6-11eb-8f71-08e0b6da0bb4.png)
 
 
 ### Parte II
@@ -105,6 +91,9 @@ Para este laboratorio se  implementaron las clases y metodos del laboratorio pas
  	
 	}
 	```	
+	
+	
+
 
 
 2.  Para probar que el recurso ‘planos’ acepta e interpreta
@@ -122,11 +111,21 @@ Para este laboratorio se  implementaron las clases y metodos del laboratorio pas
 	
 
 	Nota: puede basarse en el formato jSON mostrado en el navegador al consultar una orden con el método GET.
-
+	
+	```
+	$ curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints -d "{"""author""":"""Sebastian""","""points""":[{"""x""":50,"""y""":50},{"""x""":55,"""y""":50}],"""name""":"""bp2"""}"
+	```
+	
+	
 
 3. Teniendo en cuenta el autor y numbre del plano registrado, verifique que el mismo se pueda obtener mediante una petición GET al recurso '/blueprints/{author}/{bpname}' correspondiente.
 
+	![image](https://user-images.githubusercontent.com/50029247/108945641-f9685380-762a-11eb-8a97-927494ca0657.png)
+
+
 4. Agregue soporte al verbo PUT para los recursos de la forma '/blueprints/{author}/{bpname}', de manera que sea posible actualizar un plano determinado.
+
+	![image](https://user-images.githubusercontent.com/50029247/108945817-4c420b00-762b-11eb-8646-6eb46c639a3b.png)
 
 
 ### Parte III
@@ -134,7 +133,12 @@ Para este laboratorio se  implementaron las clases y metodos del laboratorio pas
 El componente BlueprintsRESTAPI funcionará en un entorno concurrente. Es decir, atederá múltiples peticiones simultáneamente (con el stack de aplicaciones usado, dichas peticiones se atenderán por defecto a través múltiples de hilos). Dado lo anterior, debe hacer una revisión de su API (una vez funcione), e identificar:
 
 * Qué condiciones de carrera se podrían presentar?
+	
+	Las condiciones de carreras que podemos analizar son cuando dos o mas usuarios quieren actualizar un plano al mismo  tiempo y cuando consulten al mismo tiempo la lista de planos.
+	
 * Cuales son las respectivas regiones críticas?
+
+	Una region critica seria en el blueprint a la hora de actualizar los planos concurrentemente y las partes que hacen cambiar los mapeos que contienen los planos tambien podrian considerarse como una region critica.
 
 Ajuste el código para suprimir las condiciones de carrera. Tengan en cuenta que simplemente sincronizar el acceso a las operaciones de persistencia/consulta DEGRADARÁ SIGNIFICATIVAMENTE el desempeño de API, por lo cual se deben buscar estrategias alternativas.
 

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 */
 import java.util.List;
 import java.util.logging.Level;
+
+import edu.eci.arsw.blueprints.model.Blueprint;
 import org.springframework.stereotype.Service;
 import java.util.logging.Logger;
 import org.springframework.web.bind.annotation.*;
@@ -58,5 +60,27 @@ public class BlueApiController {
 		
 		
 	}
-	
+
+	@RequestMapping(value="/new-blueprint",method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<?> manejadorPostBlueprint(@RequestBody Blueprint bp){
+		try {
+			services.addNewBlueprint(bp);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (Exception ex) {
+			Logger.getLogger(BlueApiController.class.getName()).log(Level.SEVERE, null, ex);
+			return new ResponseEntity<>("Error",HttpStatus.FORBIDDEN);
+		}
+	}
+
+	@RequestMapping(value="/{author}/{name}",method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<?> manejadorPutBlueprint(@PathVariable("author") String author,@PathVariable("name") String name,@RequestBody Blueprint bp ) {
+		try {
+			return new ResponseEntity<>(HttpStatus.ACCEPTED);
+		} catch (Exception ex) {
+			Logger.getLogger(BlueApiController.class.getName()).log(Level.SEVERE, null, ex);
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+		}
+	}
 }
